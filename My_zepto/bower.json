@@ -1,0 +1,9 @@
+{
+  "name": "ZeptoBuilder",
+  "version": "1.0.0-beta",
+  "dependencies": {
+    "material-design-lite": "~1.0.4",
+    "base64": "~0.3.0",
+    "keymaster": "~1.6.3"
+  }
+}
