@@ -1,4 +1,3 @@
 # GitPractice
 
 
-Sample git files
