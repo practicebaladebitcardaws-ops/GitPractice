@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback App</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        button { padding: 10px; margin: 5px; background: #007bff; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h1>Feedback Management</h1>
+    
+    <!-- Add Feedback Form -->
+    <h3>Add Feedback</h3>
+    <input id="date" type="date" placeholder="Date"> 
+    <input id="location" placeholder="Location">
+    <input id="company" placeholder="Company">
+    <textarea id="areas" placeholder="Areas to Improve"></textarea>
+    <input id="rating" type="number" min="1" max="5" placeholder="Rating (1-5)">
+    <button onclick="addFeedback()">Add</button>
+    
+    <!-- Feedback Table -->
+    <h3>Feedback List</h3>
+    <table id="feedbackTable">
+        <thead>
+            <tr><th>Date</th><th>Location</th><th>Company</th><th>Areas</th><th>Rating</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="feedbacks"></tbody>
+    </table>
+
+    <script>
+        // Load feedback on page load
+        window.onload = loadFeedbacks;
+
+        async function loadFeedbacks() {
+            const res = await fetch('/api/feedbacks');
+            const feedbacks = await res.json();
+            displayFeedbacks(feedbacks);
+        }
+
+        function displayFeedbacks(feedbacks) {
+            const tbody = document.getElementById('feedbacks');
+            tbody.innerHTML = feedbacks.map(f => `
+                <tr>
+                    <td>${f.date}</td>
+                    <td>${f.location}</td>
+                    <td>${f.companyName}</td>
+                    <td>${f.areasToImprove}</td>
+                    <td>${f.rating}/5</td>
+                    <td>
+                        <button onclick="deleteFeedback(${f.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function addFeedback() {
+            const feedback = {
+                date: document.getElementById('date').value,
+                location: document.getElementById('location').value,
+                companyName: document.getElementById('company').value,
+                areasToImprove: document.getElementById('areas').value,
+                rating: parseInt(document.getElementById('rating').value)
+            };
+            
+            await fetch('/api/feedbacks', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(feedback)
+            });
+            loadFeedbacks(); // Refresh table
+            clearForm();
+        }
+
+        async function deleteFeedback(id) {
+            await fetch(`/api/feedbacks/${id}`, {method: 'DELETE'});
+            loadFeedbacks();
+        }
+
+        function clearForm() {
+            document.getElementById('date').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('company').value = '';
+            document.getElementById('areas').value = '';
+            document.getElementById('rating').value = '';
+        }
+    </script>
+</body>
+</html>
