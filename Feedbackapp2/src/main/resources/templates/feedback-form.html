@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback Form</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input, textarea, select { width: 300px; padding: 8px; margin: 5px 0; }
+        button { padding: 10px 20px; background: blue; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+<h2>Organization Feedback Form</h2>
+
+<form th:action="@{/submit}" th:object="${feedback}" method="post">
+
+    <label>Date:</label><br>
+    <input type="date" th:field="*{date}" required><br>
+
+    <label>Location:</label><br>
+    <input type="text" th:field="*{location}" required><br>
+
+    <label>Organization Name:</label><br>
+    <input type="text" th:field="*{organizationName}" required><br>
+
+    <label>Areas to Improve:</label><br>
+    <textarea th:field="*{areasToImprove}"></textarea><br>
+
+    <label>Rating:</label><br>
+    <select th:field="*{rating}" required>
+        <option value="">Select</option>
+        <option value="1">1 - Poor</option>
+        <option value="2">2</option>
+        <option value="3">3 - Average</option>
+        <option value="4">4</option>
+        <option value="5">5 - Excellent</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
