@@ -16,8 +16,7 @@ pipeline {
         stage('Sonar Qube Analysis') {
             steps {
                 withSonarQubeEnv('sonarserver') {
-                  sh '''$SONAR_SCANNER\bin\sonar-scanner -Dsonar.projectKey=nodesjapp\
-                      -Dsonar.projectName=nodejsapp'''
+                  sh '''$SONAR_SCANNER/bin/sonar-scanner -Dsonar.projectKey=nodesjapp -Dsonar.projectName=nodejsapp'''
                 }
             }
         }
