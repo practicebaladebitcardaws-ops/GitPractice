@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools{
         nodejs 'node21'
-        openjdk 'jdk'
+        jdk 'jdk'
     }
     environment{
         SONAR_SCANNER= tool 'sonar-scanner'
