@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools{
         nodejs 'node21'
+        openjdk 'jdk'
     }
     environment{
         SONAR_SCANNER= tool 'sonar-scanner'
@@ -10,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git 'https://github.com/practicebaladebitcardaws-ops/GitPractice'
+                checkout scmGit(branches: [[name: '*/nodeapp']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/practicebaladebitcardaws-ops/GitPractice']])
             }
         }
         stage('Sonar Qube Analysis') {
