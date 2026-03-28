@@ -1,0 +1,14 @@
+{
+  "name": "node-login-app",
+  "version": "1.0.0",
+  "description": "Node.js login app without DB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.5",
+    "express-session": "^1.18.0"
+  }
+}
