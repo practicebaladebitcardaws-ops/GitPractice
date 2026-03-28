@@ -29,7 +29,7 @@ pipeline {
         stage('Exporting to the SonarQube') {
             steps {
                 withSonarQubeEnv('sonarserver') {
-                    sh '''$VENKAIAH_HOME/bin/sonar-scanner -Dsonar.projectKey=pythondemo -Dsonar.ProjectName=pythondemo -Dsonar.sources=/var/lib/jenkins/workspace/pyhtonlogin/'''
+                    sh '''$VENKAIAH_HOME/bin/sonar-scanner -Dsonar.projectKey=pythondemo -Dsonar.ProjectName=pythondemo -Dsonar.sources=/var/lib/jenkins/workspace/pipelinepython/'''
                 }
             }
         }
