@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/nodeapp']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/practicebaladebitcardaws-ops/GitPractice']])
+                git branch: 'nodeapp', url: 'https://github.com/practicebaladebitcardaws-ops/GitPractice'
             }
         }
         stage('Sonar Qube Analysis') {
