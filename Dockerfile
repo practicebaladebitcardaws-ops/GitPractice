@@ -2,7 +2,7 @@ FROM node AS build
 ARG var=/app
 WORKDIR ${vare}
 COPY package*.json .
-RUN npm install
+RUN npm install package.json
 COPY index.js .
 FROM nginx
 WORKDIR /usr/share/nginx/html
