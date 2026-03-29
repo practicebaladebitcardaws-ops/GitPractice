@@ -1,9 +1,10 @@
 FROM node AS build
 ARG var=/app
 WORKDIR ${vare}
+RUN apk add --no-cache python3 make g++
 COPY package*.json .
-RUN npm install package.json
-COPY index.js .
+RUN npm ci
+COPY . .
 FROM nginx
 WORKDIR /usr/share/nginx/html
 COPY --from=build build/${vare} .
