@@ -1,7 +1,6 @@
 FROM node AS build
 ARG var=/app
 WORKDIR ${vare}
-RUN apk add --no-cache python3 make g++
 COPY package*.json .
 RUN npm ci
 COPY . .
